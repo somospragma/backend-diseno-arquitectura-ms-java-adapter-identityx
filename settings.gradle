@@ -1,0 +1,10 @@
+rootProject.name = 'co-java-adapter-identityx'
+
+include ':application'
+project(':application').projectDir = file('./src/application')
+include ':domain'
+project(':domain').projectDir = file('./src/domain')
+include ':infrastructure'
+project(':infrastructure').projectDir= file('./src/infrastructure')
+
+
