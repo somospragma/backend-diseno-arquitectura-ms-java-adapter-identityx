@@ -7,8 +7,7 @@ import com.identityx.clientSDK.collections.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
-@FeignClient(value = "IdentityXApi", url = ServiceConstants.IDENTITYX_HOST + ServiceConstants.IDENTITYX_TENANT,
-configuration = FeignClientConfig.class)
+@FeignClient(value = "IdentityXApi", url = ServiceConstants.IDENTITYX_HOST + ServiceConstants.IDENTITYX_TENANT)
 public interface IdentityXFeign {
 
     @GetMapping(path = ServiceConstants.FIND_POLICY_PATH+"{policyId}")

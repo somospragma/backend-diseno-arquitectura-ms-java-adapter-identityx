@@ -333,7 +333,7 @@ class IdentityXApiPortImplTest {
         Long otpTimeAlive  = 90L;
 
         String policyId = "OTPPN";
-        String applicationId = "itaupn";
+        String applicationId = "pragma";
         User user = new User();
         user.setUserId(userId);
 
@@ -573,7 +573,7 @@ class IdentityXApiPortImplTest {
         String userId = "testUserId";
 
         String policyId = "OTPPN";
-        String applicationId = "itaupn";
+        String applicationId = "pragma";
         User user = new User();
         user.setUserId(userId);
 

@@ -81,5 +81,5 @@ public class ServiceConstants {
     public static final String HEADER_TOKEN_USER_ID_REGIONAL = "token-user-id";
     public static final String HEADER_SESSION_ID_REGIONAL = "session_id";
 
-    public static final String IDENTITYX_SECRET_NAME = "${identityx.key.secret.name}";
+    public static final String IDENTITYX_SECRET_NAME = "nombre";
 }

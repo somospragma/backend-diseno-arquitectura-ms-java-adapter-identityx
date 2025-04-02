@@ -1,179 +1,132 @@
-# IdentityX Controller
+# CO-JAVA-ADAPTER-IDENTITYX
 
-## Overview
-The IdentityX Controller is a Spring Boot application designed to integrate with the IdentityX platform. It exposes REST endpoints to facilitate identity verification and authentication services, enabling secure and seamless verification operations.
+Microservicio encargado de orquestar las operaciones del IdentityX REST API, aca encontramos operaciones para autenticacion y registro con FIDO, OTP.
 
-## Table of Contents
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [API Endpoints](#api-endpoints)
-    - [Identity Verification](#identity-verification)
-    - [Identity Validation](#identity-validation)
-- [Usage](#usage)
-    - [Example Request](#example-request)
-    - [Example Response](#example-response)
-- [Contributing](#contributing)
-- [Security](#security)
-- [License](#license)
-- [Support](#support)
+## Requisitos
+- **Java 17**
+- **Gradle** (o usar el wrapper incluido)
 
-## Prerequisites
-Before setting up the IdentityX Controller, ensure you have the following:
+## Instalación
 
-- **Java 11** or higher
-- **Spring Boot** framework
-- **Gradle** as a build tool
-- **IdentityX SDK** (contact the IdentityX support for SDK details)
-
-## Installation
-
-### 1. Clone the repository:
-```bash
-git clone [repository-url]
-cd [repository-name]
+Clona el repositorio y accede al directorio del proyecto:
+```sh
+git clone https://github.com/somospragma/co-java-adapter-identityx.git
+cd co-java-adapter-identityx
 ```
 
-### 2. Install dependencies:
-If you are using Gradle:
-```bash
+## Construcción y Ejecución
+
+Para compilar y ejecutar el proyecto, usa los siguientes comandos:
+
+### Compilar el proyecto:
+```sh
 gradle build
 ```
 
-## Configuration
-To integrate the IdentityX Controller with your platform, configure the following properties:
-#### 1. Open application.properties or application.yml and add the following configuration:
-
-```bash
-identityx:
-  base-url: [your-identityx-base-url]
-  api-key: [your-api-key]
-  api-secret: [your-api-secret]
+### Ejecutar la aplicación:
+```sh
+gradle run
 ```
-Replace [your-identityx-base-url], [your-api-key], and [your-api-secret] with your actual IdentityX credentials.
 
-## API Endpoints
+## API REST
 
-### Identity Verification
+El proyecto incluye una API REST documentada en `api-docs.yaml`. Puedes visualizar la documentación utilizando Swagger UI:
 
-The controller provides the following endpoints for identity verification operations:
+1. Levanta el servidor:
+   ```sh
+   gradle bootRun
+   ```
+2. Accede a `http://localhost:8080/swagger-ui.html` en tu navegador.
 
-**POST** /api/v1/identity/verify
+### Endpoints disponibles
 
-Initiates identity verification by providing the user's details.
+#### `PUT /security/v1/secure_device/registrations/device/validate`
+**Descripción**: Endpoint para actualizar un desafío de registro.
 
-### Request Body:
+**Headers requeridos:**
+- `channel-id` (string)
+- `application` (string)
+- `timestamp` (string)
+- `transaction_id` (string)
+- `terminal_id` (string)
+- `token-client-id` (string, opcional)
 
-```bash
+#### `POST /security/v1/secure_device/authentication`
+**Descripción**: Autentica un dispositivo seguro.
+
+**Headers requeridos:**
+- `channel-id` (string)
+- `application` (string)
+- `timestamp` (string)
+- `transaction_id` (string)
+- `terminal_id` (string)
+- `token-client-id` (string, opcional)
+
+**Body:**
+```json
 {
-  "userId": "user123",
-  "documentType": "PASSPORT",
-  "documentNumber": "AB123456"
+  "device_id": "string",
+  "auth_data": "string"
 }
 ```
 
-### Response:
+#### `GET /security/v1/secure_device/status`
+**Descripción**: Obtiene el estado del dispositivo seguro.
 
-```bash
+**Headers requeridos:**
+- `channel-id` (string)
+- `application` (string)
+- `timestamp` (string)
+- `transaction_id` (string)
+- `terminal_id` (string)
+- `token-client-id` (string, opcional)
+
+#### `POST /security/v1/secure_device/registrations`
+**Descripción**: Registra un nuevo dispositivo seguro.
+
+**Headers requeridos:**
+- `channel-id` (string)
+- `application` (string)
+- `timestamp` (string)
+- `transaction_id` (string)
+- `terminal_id` (string)
+- `token-client-id` (string, opcional)
+
+**Body:**
+```json
 {
-  {
-  "status": "SUCCESS",
-  "verificationId": "ver-123-456",
-  "timestamp": "2023-12-20T10:30:00Z"
+  "device_id": "string",
+  "registration_data": "string"
 }
 ```
 
-**GET** /api/v1/identity/status/{id}
-Checks the verification status of a given identity verification request.
+#### `DELETE /security/v1/secure_device/registrations/{device_id}`
+**Descripción**: Elimina el registro de un dispositivo seguro.
 
-### Response:
+**Headers requeridos:**
+- `channel-id` (string)
+- `application` (string)
+- `timestamp` (string)
+- `transaction_id` (string)
+- `terminal_id` (string)
+- `token-client-id` (string, opcional)
 
-```bash
-{
-"status": "PENDING",
-"verificationId": "ver-123-456",
-"timestamp": "2023-12-20T10:30:00Z"
-}
+## Pruebas
+
+Para ejecutar las pruebas unitarias:
+```sh
+gradle test
 ```
 
-**POST** /api/v1/identity/validate
-Validates identity documents submitted by the user.
+## Contribución
 
-### Request Body:
+Si deseas contribuir, por favor sigue estos pasos:
+1. Haz un fork del repositorio.
+2. Crea una nueva rama (`git checkout -b feature-nueva-funcionalidad`).
+3. Realiza tus cambios y haz commits (`git commit -m 'Descripción del cambio'`).
+4. Sube tus cambios (`git push origin feature-nueva-funcionalidad`).
+5. Abre un Pull Request.
 
-```bash
-{
-"documentType": "PASSPORT",
-"documentNumber": "AB123456"
-}
-```
-### Response:
+## Licencia
 
-```bash
-{
-"status": "VALID",
-"documentType": "PASSPORT",
-"documentNumber": "AB123456"
-}
-```
-
-## Usage
-### Example Request
-### Identity Verification:
-```bash
-curl -X POST "http://localhost:8080/api/v1/identity/verify" \
--H "Content-Type: application/json" \
--d '{
-"userId": "user123",
-"documentType": "PASSPORT",
-"documentNumber": "AB123456"
-}'
-```
-### Example Response
-```bash
-{
-"status": "SUCCESS",
-"verificationId": "ver-123-456",
-"timestamp": "2023-12-20T10:30:00Z"
-}
-```
-
-## Contributing
-We welcome contributions to the IdentityX Controller project. Please follow these steps to contribute:
-
- 1. **Fork** the repository.
-
- 2. **Create a new branch** for your feature:
-    ```bash
-    git checkout -b feature/amazing-feature
-    ```
- 3. **Commit your changes** with a clear message:
-
-    ```bash
-    git commit -m "Add some amazing feature"
-    ```
- 4. **Push your changes** to your fork:
-
-    ```bash
-    git push origin feature/amazing-feature
-    ```
- 5. **Open a Pull Request** to the main repository.
-
-We will review your changes and merge them if they meet the project's standards.
-
-## Security
-To ensure the security of your integration:
-
-- **API keys** should always be stored securely. Avoid hardcoding them in your source code.
-
-- Use **HTTPS** for secure communication with the IdentityX platform.
-
-- Follow security best practices for handling sensitive data such as user identities and documents.
-
-## License
-This project is licensed under the [LICENSE NAME] - see the LICENSE.md file for more details.
-
-## Support
-If you have any questions or need support, feel free to reach out.
-
-
+Este proyecto está bajo la licencia MIT. Consulta el archivo `LICENSE` para más detalles.

@@ -30,7 +30,7 @@ import static co.com.pragma.identityx.constants.ServiceConstants.*;
 public class IdentityXController {
     private final IdentityxUseCase identityXUseCase;
 
-    @PostMapping(path = "${co.itau.route.api.adapter.identityx.otp.generate}")
+    @PostMapping(path = "${co.pragma.api.adapter.identityx.otp.generate}")
     @Operation(summary = OPERATION_GENERATE_OTP)
     @ApiResponses(value = {
             @ApiResponse(responseCode = RESPONSE_STATUS_CODE_OK, description = ServiceConstants.RESPONSE_STATUS_DESC_OK,content = @Content(schema = @Schema(implementation = OtpRequestModel.class))),
@@ -57,7 +57,7 @@ public class IdentityXController {
 
     }
 
-    @PostMapping(path = "${co.itau.route.api.adapter.identityx.otp.validate}")
+    @PostMapping(path = "${co.pragma.api.adapter.identityx.otp.validate}")
     @Operation(summary = OPERATION_VALIDATE_OTP)
     @ApiResponses(value = {
             @ApiResponse(responseCode = RESPONSE_STATUS_CODE_OK, description = ServiceConstants.RESPONSE_STATUS_DESC_OK,content = @Content(schema = @Schema(implementation = OtpRequestModel.class))),
@@ -84,7 +84,7 @@ public class IdentityXController {
 
     }
 
-    @GetMapping(path = "${co.itau.route.api.adapter.identityx.get.user}")
+    @GetMapping(path = "${co.pragma.api.adapter.identityx.get.user}")
     @Operation(summary = OPERATION_GET_USER)
     @ApiResponses(value = {
             @ApiResponse(responseCode = RESPONSE_STATUS_CODE_OK, description = ServiceConstants.RESPONSE_STATUS_DESC_OK,content = @Content(schema = @Schema(implementation = UserRequestModel.class))),
@@ -105,7 +105,7 @@ public class IdentityXController {
         return ResponseHelper.successResponse(identityXUseCase.getUser(userId));
     }
 
-    @PostMapping(path = "${co.itau.route.api.adapter.identityx.create.user}")
+    @PostMapping(path = "${co.pragma.api.adapter.identityx.create.user}")
     @Operation(summary = OPERATION_CREATE_USER)
     @ApiResponses(value = {
             @ApiResponse(responseCode = RESPONSE_STATUS_CODE_OK, description = ServiceConstants.RESPONSE_STATUS_DESC_OK,content = @Content(schema = @Schema(implementation = UserRequestModel.class))),
@@ -128,7 +128,7 @@ public class IdentityXController {
         return ResponseHelper.successResponse(identityXUseCase.createUser(userId));
     }
 
-    @PostMapping(path = "${co.itau.route.api.adapter.identityx.create.registration}")
+    @PostMapping(path = "${co.pragma.api.adapter.identityx.create.registrations}")
     @Operation(summary = OPERATION_CREATE_REGISTRATION)
     @ApiResponses(value = {
             @ApiResponse(responseCode = RESPONSE_STATUS_CODE_OK, description = ServiceConstants.RESPONSE_STATUS_DESC_OK,content = @Content(schema = @Schema(implementation = RegistrationModel.class))),
@@ -152,7 +152,7 @@ public class IdentityXController {
         return ResponseHelper.successResponse(identityXUseCase.createRegistration(userId,applicationData));
     }
 
-    @PostMapping(path = "${co.itau.route.api.adapter.identityx.registration-challenge.create}")
+    @PostMapping(path = "${co.pragma.api.adapter.identityx.registration-challenge.create}")
     @Operation(summary = OPERATION_CREATE_REGISTRATION_CHALLENGE)
     @ApiResponses(value = {
             @ApiResponse(responseCode = RESPONSE_STATUS_CODE_OK, description = ServiceConstants.RESPONSE_STATUS_DESC_OK,content = @Content(schema = @Schema(implementation = RegistrationChallengeModel.class))),
@@ -179,7 +179,7 @@ public class IdentityXController {
 
     }
 
-    @PutMapping(path = "${co.itau.route.api.adapter.identityx.registration.challenge.update}")
+    @PutMapping(path = "${co.pragma.api.adapter.identityx.registration.challenge.update}")
     @Operation(summary = OPERATION_UPDATE_REGISTRATION_CHALLENGE)
     @ApiResponses(value = {
             @ApiResponse(responseCode = RESPONSE_STATUS_CODE_OK, description = ServiceConstants.RESPONSE_STATUS_DESC_OK,content = @Content(schema = @Schema(implementation = RegistrationChallengeModel.class))),
@@ -205,7 +205,7 @@ public class IdentityXController {
 
     }
 
-    @GetMapping(path = "${co.itau.route.api.adapter.identityx.get.application}")
+    @GetMapping(path = "${co.pragma.api.adapter.identityx.get.application}")
     @Operation(summary = OPERATION_GET_APPLICATION)
     @ApiResponses(value = {
             @ApiResponse(responseCode = RESPONSE_STATUS_CODE_OK, description = ServiceConstants.RESPONSE_STATUS_DESC_OK,content = @Content(schema = @Schema(implementation = ApplicationRequestModel.class))),
@@ -226,7 +226,7 @@ public class IdentityXController {
         return ResponseHelper.successResponse(identityXUseCase.getApplicationById(appId));
     }
 
-    @GetMapping(path = "${co.itau.route.api.adapter.identityx.get.policy}")
+    @GetMapping(path = "${co.pragma.api.adapter.identityx.get.policy}")
     @Operation(summary = OPERATION_GET_POLICY)
     @ApiResponses(value = {
             @ApiResponse(responseCode = RESPONSE_STATUS_CODE_OK, description = ServiceConstants.RESPONSE_STATUS_DESC_OK,content = @Content(schema = @Schema(implementation = PolicyRequestModel.class))),
@@ -247,7 +247,7 @@ public class IdentityXController {
         return ResponseHelper.successResponse(identityXUseCase.getPolicyById(policyId));
     }
 
-    @PostMapping(path = "${co.itau.route.api.adapter.identityx.auth-request.generate}")
+    @PostMapping(path = "${co.pragma.api.adapter.identityx.auth-request.generate}")
     @Operation(summary = OPERATION_CREATE_AUTHENTICATION_REQUEST)
     @ApiResponses(value = {
             @ApiResponse(responseCode = RESPONSE_STATUS_CODE_OK, description = ServiceConstants.RESPONSE_STATUS_DESC_OK,content = @Content(schema = @Schema(implementation = AuthenticationRequestModel.class))),
@@ -274,7 +274,7 @@ public class IdentityXController {
         return ResponseHelper.successResponse(identityXUseCase.createAuthRequest(userId,applicationData,policy,description,type));
 
     }
-    @PutMapping(path = "${co.itau.route.api.adapter.identityx.auth-request.update}")
+    @PutMapping(path = "${co.pragma.api.adapter.identityx.auth-request.update}")
     @Operation(summary = OPERATION_UPDATE_AUTHENTICATION_REQUEST)
     @ApiResponses(value = {
             @ApiResponse(responseCode = RESPONSE_STATUS_CODE_OK, description = ServiceConstants.RESPONSE_STATUS_DESC_OK,content = @Content(schema = @Schema(implementation = AuthenticationRequestModel.class))),
@@ -300,7 +300,7 @@ public class IdentityXController {
 
     }
 
-    @GetMapping(path = "${co.itau.route.api.adapter.identityx.list.authenticators}")
+    @GetMapping(path = "${co.pragma.api.adapter.identityx.list.authenticators}")
     @Operation(summary = OPERATION_LIST_AUTHENTICATORS_REQUEST)
     @ApiResponses(value = {
             @ApiResponse(responseCode = RESPONSE_STATUS_CODE_OK, description = ServiceConstants.RESPONSE_STATUS_DESC_OK,content = @Content(schema = @Schema(implementation = ResponseListAuthenticatorsDto.class))),
@@ -325,7 +325,7 @@ public class IdentityXController {
                 new ResponseListAuthenticatorsDto(identityXUseCase.getListAuthenticators(userId,applicationId)));
     }
 
-    @DeleteMapping(path = "${co.itau.route.api.adapter.identityx.delete.authenticator}")
+    @DeleteMapping(path = "${co.pragma.api.adapter.identityx.delete.authenticators}")
     @Operation(summary = OPERATION_DELETE_AUTHENTICATORS_REQUEST)
     @ApiResponses(value = {
             @ApiResponse(responseCode = RESPONSE_STATUS_CODE_OK, description = ServiceConstants.RESPONSE_STATUS_DESC_OK,content = @Content(schema = @Schema(implementation = ResponseDeleteAuthenticatorDto.class))),

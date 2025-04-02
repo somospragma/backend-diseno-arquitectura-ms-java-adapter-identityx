@@ -114,3 +114,5 @@ hsrc/infrastructure/src/main/java/co/com/pragma/identityx/exceptionshandler/dto/
 Xsrc/infrastructure/src/test/java/co/com/pragma/identityx/helpers/ResponseHelperTest.java,4\d\4d1c24758eb2ab42294eefc590ebbafe37c76473
 9
 	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+{
+Ksrc/application/src/main/java/co/com/pragma/identityx/config/AppConfig.java,b\c\bce0109fb5e1b0277074c2e6139d3c0747742283

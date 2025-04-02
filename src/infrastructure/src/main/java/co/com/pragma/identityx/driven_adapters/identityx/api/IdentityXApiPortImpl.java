@@ -13,6 +13,7 @@ import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
@@ -45,8 +46,10 @@ public class IdentityXApiPortImpl implements IdentityXApiPort {
 
     @Scheduled(fixedRate = 3600000)
     public void generateToken() throws Exception {
-        String privateKeyPem = secretManagerService.getSecret(secretName).getPrivateKey();
-        token = generateToken( new Date(System.currentTimeMillis() + 3600000 ), privateKeyPem);
+        // se sugiere la obtencion de la privateKey desde un secret manager
+        //String privateKeyPem = secretManagerService.getSecret(secretName).getPrivateKey();
+        // Adjuntar privateKeyPem al llamado, configuracion en consola identityx
+        //token = generateToken( new Date(System.currentTimeMillis() + 3600000 ), privateKeyPem);
     }
 
     public String generateToken(Date expirationDate,String privateKeyPem) throws Exception {
